@@ -1,0 +1,48 @@
+#include <stdio.h>
+#define N 10
+#define M 3
+
+int main()
+{
+    float a[N][M];
+    int i, j, cnt = 0;
+    float temp = 0;
+    float avg[N] = { 0 }, sum = 0;
+    printf("请输入每个同学的成绩：");
+
+    for (i = 0; i < N; ++i)
+        for (j = 0; j < M; ++j)
+            scanf_s("%f", &a[i][j]);
+    for (i = 0; i < N; ++i)
+    {
+        for (j = 0; j < M; ++j)
+        {
+            printf("%.1f", a[i][j]);
+            ++cnt;
+            if (cnt % 3 == 0)
+                printf("\n");
+            else
+                printf(" ");
+        }
+    }
+    printf("每位同学的平均分为：\n");
+    for (i = 0; i < N; ++i)
+    {
+        for (j = 0; j < M; ++j)
+            avg[i] += a[i][j];
+        avg[i] = (float)avg[i] / 3;
+        printf(" %.1f", avg[i]);
+    }
+    for (i = 0; i < N - 1; ++i)
+        for (j = 0; j < N - 1 - i; ++j)
+            if (avg[j + 1] > avg[j])
+            {
+                temp = avg[j];
+                avg[j] = avg[j + 1];
+                avg[j + 1] = temp;
+            }
+    printf("\n平均分降序排序：\n");
+    for (i = 0; i < N; ++i)
+        printf(" %.1f", avg[i]);
+    return 0;
+}
